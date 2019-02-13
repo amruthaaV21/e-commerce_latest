@@ -1,4 +1,4 @@
-class CreateProductsDiscountsTable < ActiveRecord::Migration[5.1]
+class CreateProductsDiscountsJoinTable < ActiveRecord::Migration[5.1]
   def change
     create_join_table :products, :discounts do |t|
     t.index :product_id
@@ -6,3 +6,5 @@ class CreateProductsDiscountsTable < ActiveRecord::Migration[5.1]
     end
   end
 end
+
+

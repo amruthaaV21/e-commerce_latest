@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190212052715) do
+ActiveRecord::Schema.define(version: 20190213153940) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer "address_id"
@@ -22,6 +22,43 @@ ActiveRecord::Schema.define(version: 20190212052715) do
     t.string "postal_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "addresses_users", id: false, force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "address_id", null: false
+    t.index ["address_id"], name: "index_addresses_users_on_address_id"
+    t.index ["user_id"], name: "index_addresses_users_on_user_id"
+  end
+
+  create_table "admins", force: :cascade do |t|
+    t.integer "admin_id"
+    t.string "allowed_access"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "buyer_id_seller_id", id: false, force: :cascade do |t|
+    t.integer "buyer_id_id", null: false
+    t.integer "seller_id_id", null: false
+    t.index [nil], name: "index_buyer_id_seller_id_on_buyer_id"
+    t.index [nil], name: "index_buyer_id_seller_id_on_seller_id"
+  end
+
+  create_table "buyers", force: :cascade do |t|
+    t.integer "buyer_id"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "card_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "buyers_sellers", id: false, force: :cascade do |t|
+    t.integer "buyer_id", null: false
+    t.integer "seller_id", null: false
+    t.index ["buyer_id"], name: "index_buyers_sellers_on_buyer_id"
+    t.index ["seller_id"], name: "index_buyers_sellers_on_seller_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -55,12 +92,28 @@ ActiveRecord::Schema.define(version: 20190212052715) do
     t.index ["product_id"], name: "index_discounts_products_on_product_id"
   end
 
+  create_table "order_details", force: :cascade do |t|
+    t.integer "order_id"
+    t.integer "product_id"
+    t.integer "quantity"
+    t.integer "price_per_product"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "orders", force: :cascade do |t|
     t.integer "order_id"
     t.integer "buyer_id"
     t.integer "total_price"
     t.string "payment_method"
     t.string "order_status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "product_images", force: :cascade do |t|
+    t.integer "product_id"
+    t.binary "product_image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -88,6 +141,20 @@ ActiveRecord::Schema.define(version: 20190212052715) do
     t.integer "role_id", null: false
     t.index ["role_id"], name: "index_roles_users_on_role_id"
     t.index ["user_id"], name: "index_roles_users_on_user_id"
+  end
+
+  create_table "sellers", force: :cascade do |t|
+    t.integer "seller_id"
+    t.string "company_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_images", force: :cascade do |t|
+    t.integer "user_id"
+    t.binary "user_image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
