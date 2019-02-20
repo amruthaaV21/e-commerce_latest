@@ -1,9 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  admin_id: 1
-  allowed_access: MyString
-
-two:
-  admin_id: 1
-  allowed_access: MyString
