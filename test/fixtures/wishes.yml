@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  wish_quantity: 1
+  purchased_quantity: 1
+  purchase_status: false
+  product: one
+
+two:
+  wish_quantity: 1
+  purchased_quantity: 1
+  purchase_status: false
+  product: two
